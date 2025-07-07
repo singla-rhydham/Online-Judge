@@ -234,23 +234,15 @@
 }
 
 /* Profile Section Styles */
-.profile-link {
-  display: flex;
-  align-items: center;
-  margin-left: 1rem;
-}
-
-.profile-pic {
+.profile-picture {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #7e22ce;
-  transition: transform 0.3s ease;
+  cursor: pointer;
 }
 
-.profile-pic:hover {
-  transform: scale(1.1);
+.profile-picture:hover {
+  outline: 2px solid #7e22ce;
 }
 
 /* Adjust button container for profile */
@@ -266,4 +258,22 @@
     width: 36px;
     height: 36px;
   }
+}
+
+.contribute-btn {
+  color: white;
+  background-color: #7e22ce;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  padding: 0.5rem 1.25rem;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 1rem;
+}
+
+.contribute-btn:hover {
+  background-color: #6b21a8;
 }

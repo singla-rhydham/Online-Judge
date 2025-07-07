@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
         minlength: [2, "Username must be at least 2 characters long"],
         maxlength: [50, "Username cannot exceed 50 characters"]
     },
-    firstname: {
+    firstName: {
         type: String,
         required: [true, "First name is required"],
         trim: true, // Remove whitespace from beginning and end
@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
         maxlength: [50, "First name cannot exceed 50 characters"]
     },
     
-    lastname: {
+    lastName: {
         type: String,
         required: [true, "Last name is required"],
         trim: true,
@@ -38,6 +38,11 @@ const userSchema = new mongoose.Schema({
         required: [true, "Password is required"],
         minlength: [6, "Password must be at least 6 characters long"]
     },
+
+    isAdmin: {
+        type: Boolean,
+        default: false
+    }
     
 }, {
     timestamps: true // Automatically adds createdAt and updatedAt fields

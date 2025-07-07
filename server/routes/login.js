@@ -7,7 +7,6 @@ require('dotenv').config();
 
 router.post('/', async (req, res) => {
     try {
-        console.log('Reached login');
         const {userName, password} = req.body;
         if(!userName || !password) return res.status(400).json({message: "Please enter User name and password"});
 
@@ -17,6 +16,12 @@ router.post('/', async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
         if(!isMatch) return res.status(400).json({message: "Incorrect password"});
 
+        const token = jwt.sign(
+            { id: user._id, isAdmin: user.isAdmin }, 
+            process.env.JWT_SECRET,                  
+            { expiresIn: '2h' }                     
+        );
+        
         return res.status(200)
             .cookie("token", token, cookieOptions)
             .json({

@@ -53,8 +53,6 @@ router.post('/register', async (req, res) => {
         newUser.token = token;
         await newUser.save();
         res.status(201).send("User registered successfully");
-        //newUser.password = undefined;
-        //return res.status(200).json({message: 'User created successfully', newUser});
         
     } catch (error) {
         console.log(error);
