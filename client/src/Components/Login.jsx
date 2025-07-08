@@ -18,13 +18,18 @@ const Login = () => {
     const formData = new FormData(e.target);
     const userName = formData.get('userName');
     const password = formData.get('password');
+    console.log(userName, "hello");
 
     try {
-      const response = await axios.post('http://localhost:5000/login', { userName, password });
-
+      const response = await axios.post(
+        'http://localhost:5000/login',
+        { userName, password },
+        { withCredentials: true }
+      );
       localStorage.setItem('token', response.data.token);
 
       alert('Login successful!');
+      loadUser();
       navigate('/'); 
 
     } catch (error) {

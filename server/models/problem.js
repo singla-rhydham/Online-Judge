@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 
 const problemSchema = new mongoose.Schema({
-  name: String,
+  problemName: String,
   difficulty: String,
-  tags: [String],
+  topicTags: [String],
+  description: String,
   sampleInput: String,
   sampleOutput: String,
   hiddenTestCases: [String],

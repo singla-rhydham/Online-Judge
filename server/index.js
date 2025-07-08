@@ -4,16 +4,25 @@ const app = express();
 const dotenv = require('dotenv');
 dotenv.config();
 
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
+const cors = require('cors');
+
+app.use(cors({
+  origin: 'http://localhost:5173', 
+  credentials: true         
+}));
+
+const PORT = process.env.PORT;
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 const { DBConnection } = require("./database/db.js");
 DBConnection();
 
 const contributeRoute = require('./routes/contribute');
 app.use('/contribute', contributeRoute);
-
-
-const PORT = process.env.PORT;
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 const loginRoute = require('./routes/login.js');
 app.use('/login', loginRoute);

@@ -1,0 +1,52 @@
+.contribute-container {
+  position: fixed;
+  top: 65px; 
+  left: 0;
+  width: 100%;
+  height: calc(100% - 65px); 
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 50;
+  padding: 2rem 1rem; 
+  box-sizing: border-box;
+}
+
+.contribute-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #fce7f3;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 600px;
+}
+
+.contribute-form input,
+.contribute-form textarea,
+.contribute-form select {
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.contribute-form button {
+  background-color: #7e22ce;
+  color: white;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.contribute-form button:hover {
+  background-color: #6b21a8;
+}

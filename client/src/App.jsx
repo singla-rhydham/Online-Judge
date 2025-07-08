@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './Components/Navbar.jsx';
 import Login from './Components/Login.jsx';
 import Signup from './Components/Signup.jsx';
+import Contribute from './Components/Contribute.jsx';
+
 
 function App() {
   return (
@@ -11,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/contribute" element={<Contribute />} />
       </Routes>
     </Router>
   );

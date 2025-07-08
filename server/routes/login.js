@@ -21,6 +21,13 @@ router.post('/', async (req, res) => {
             process.env.JWT_SECRET,                  
             { expiresIn: '2h' }                     
         );
+
+        const cookieOptions = {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production', // send only over HTTPS in production
+            sameSite: 'Lax', // CSRF protection
+            maxAge: 24 * 60 * 60 * 1000 // 1 day
+        };
         
         return res.status(200)
             .cookie("token", token, cookieOptions)
@@ -35,7 +42,6 @@ router.post('/', async (req, res) => {
     } catch (error) {
         console.log(error);
         res.status(500).json({message: "Login error"});
-    
     }
 });
 
