@@ -30,6 +30,9 @@ app.use('/login', loginRoute);
 const signupRoute = require('./routes/signup.js');
 app.use('/signup', signupRoute);
 
+const practiceRoute = require('./routes/practice.js');
+app.use('/practice', practiceRoute); 
+
 app.listen(PORT, () => {
     console.log('Listening on port ' + PORT);
 });

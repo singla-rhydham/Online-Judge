@@ -16,6 +16,15 @@
   box-sizing: border-box;
 }
 
+.contribute-title {
+  color: #334155; /* Deep purple, matches your theme */
+  font-size: 1.75rem; /* Slightly larger for better heading visibility */
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+
 .contribute-form {
   display: flex;
   flex-direction: column;

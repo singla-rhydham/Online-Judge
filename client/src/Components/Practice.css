@@ -1,0 +1,80 @@
+.practice-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  padding-top: 85px; /* 65px navbar + 20px padding */
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fdf2f8; /* A very light pink, from your theme */
+}
+
+.practice-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #7e22ce; /* Purple from theme */
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.no-problems {
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.problem-list {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.problem-card {
+  background-color: #fff;
+  border: 1px solid #fbcfe8; /* Light pink border */
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.problem-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 20px rgba(126, 34, 206, 0.1);
+}
+
+.problem-name {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.problem-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.problem-difficulty {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  color: white;
+  text-transform: capitalize;
+}
+
+.problem-difficulty.easy { background-color: #10b981; }
+.problem-difficulty.medium { background-color: #f59e0b; }
+.problem-difficulty.hard { background-color: #ef4444; }
+
+.problem-tags {
+  color: #6b7280;
+  font-style: italic;
+}

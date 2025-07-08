@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Problem = require('../models/problem'); 
 
-router.post('/contribute', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const newProblem = new Problem(req.body);
     await newProblem.save();
