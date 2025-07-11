@@ -15,11 +15,13 @@ const generateFile = (language, code) => {
     if (language.toLowerCase() === 'python') {
         fileName = `${fileId}.py`;
     } else if (language.toLowerCase() === 'java') {
-        fileName = `Main${fileId}.java`;
-        code = code.replace(/public class \w+/, `public class Main${fileId}`);
+        const safeClassName = `Main${fileId.replace(/-/g, '_')}`; // safe Java class name
+        fileName = `${safeClassName}.java`;
+        code = code.replace(/public class \w+/, `public class ${safeClassName}`);
     } else {
         fileName = `${fileId}.${language}`;
     }
+
 
     const filePath = path.join(dirCodes, fileName);
     fs.writeFileSync(filePath, code);

@@ -5,7 +5,7 @@ const { exec } = require('child_process');
 const outputFolder = path.join(__dirname, "outputs");
 if (!fs.existsSync(outputFolder)) fs.mkdirSync(outputFolder, { recursive: true });
 
-const executeCpp = async (filePath) => {
+const executeCpp = async (filePath, inputFilePath) => {
     const outputId = path.basename(filePath).split(".")[0];
     const outputPath = path.join(outputFolder, `${outputId}.exe`);
 
@@ -13,7 +13,7 @@ const executeCpp = async (filePath) => {
         exec(`g++ "${filePath}" -o "${outputPath}"`, (err, stdout, stderr) => {
             if (err) return reject({ err, stderr });
 
-            exec(`cmd /c "${outputPath}"`, (runErr, runStdout, runStderr) => {
+            exec(`cmd /c "${outputPath}" < "${inputFilePath}"`, (runErr, runStdout, runStderr) => {
                 if (runErr) return reject({ runErr, runStderr });
                 resolve(runStdout);
             });

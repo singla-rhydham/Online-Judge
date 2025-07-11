@@ -1,0 +1,69 @@
+.problem-page-container {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #fff7fc;
+  min-height: 100vh;
+}
+
+.problem-details {
+  margin-bottom: 2rem;
+}
+
+.problem-details h2 {
+  color: #7e22ce;
+  margin-bottom: 1rem;
+}
+
+.description {
+  white-space: pre-wrap;
+  background: #fce7f3;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.editor-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.language-select {
+  width: fit-content;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.code-editor {
+  width: 100%;
+  height: 300px;
+  font-family: monospace;
+  font-size: 1rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f9fafb;
+}
+
+.submit-code-btn {
+  background-color: #7e22ce;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  width: fit-content;
+}
+
+.submit-code-btn:hover {
+  background-color: #6b21a8;
+}
+
+.output-section pre {
+  background-color: #e2e8f0;
+  padding: 1rem;
+  border-radius: 8px;
+  white-space: pre-wrap;
+}

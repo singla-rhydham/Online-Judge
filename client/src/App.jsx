@@ -6,6 +6,7 @@ import Login from './Components/Login.jsx';
 import Signup from './Components/Signup.jsx';
 import Contribute from './Components/Contribute.jsx';
 import Practice from './Components/Practice';
+import ProblemPage from './Components/ProblemPage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/contribute" element={<Contribute />} />
         <Route path="/practice" element={<Practice />} />
+        <Route path="/problems/:id" element={<ProblemPage />} />
       </Routes>
     </Router>
   );
