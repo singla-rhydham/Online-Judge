@@ -1,42 +1,54 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './ProfilePage.css';
 
-const ProfilePage = ({ userId }) => {
+const ProfilePage = () => {
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
-    axios.get(`/api/users/${userId}/profile`)
-      .then(res => setProfile(res.data))
-      .catch(console.error);
-  }, [userId]);
+    const token = localStorage.getItem('token');
+    if (!token) return;
 
-  if (!profile) return <p>Loading...</p>;
+    axios.get('http://localhost:5000/profile', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then(res => setProfile(res.data))
+    .catch(err => console.error('Failed to load profile', err));
+  }, []);
+
+  if (!profile) return <div>Loading...</div>;
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold">{profile.name}</h1>
-      <p className="text-gray-500">{profile.email}</p>
+    <div className="profile-container">
+<h2 style={{ marginTop: '3rem', color: '#7e22ce' }}>My Profile</h2>
+      <p>Email: {profile.email}</p>
+      <p>Problems Solved: {profile.solvedCount}</p>
 
-      <div className="mt-4">
-        <h2 className="text-xl font-semibold">Solved Problems</h2>
-        <div className="grid grid-cols-3 gap-4 mt-2">
-          <StatBox label="Easy" value={profile.totalSolved.easy} />
-          <StatBox label="Medium" value={profile.totalSolved.medium} />
-          <StatBox label="Hard" value={profile.totalSolved.hard} />
-        </div>
-        <div className="mt-4 font-bold">Total: {profile.totalSolved.overall}</div>
-      </div>
-
-      {/* Add more sections: recent activity, submission history, etc. */}
+      <h3>Submission History</h3>
+      <table className="submission-table">
+        <thead>
+          <tr>
+            <th>Problem</th>
+            <th>Language</th>
+            <th>Status</th>
+            <th>Submitted</th>
+          </tr>
+        </thead>
+        <tbody>
+          {profile.submissions.map((sub, i) => (
+            <tr key={i}>
+              <td>{sub.problemId.problemName}</td>
+              <td>{sub.language}</td>
+              <td className={sub.status === 'Accepted' ? 'accepted' : 'failed'}>
+                {sub.status}
+              </td>
+              <td>{new Date(sub.createdAt).toLocaleString()}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
-
-const StatBox = ({ label, value }) => (
-  <div className="p-4 border rounded shadow text-center">
-    <p className="text-lg">{label}</p>
-    <p className="text-2xl font-bold">{value}</p>
-  </div>
-);
 
 export default ProfilePage;

@@ -1,0 +1,93 @@
+.profile-container {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #fff7fc;
+  min-height: 100vh;
+  font-family: sans-serif;
+  
+}
+
+.profile-header {
+  color: #7e22ce;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.user-info {
+  background-color: #fce7f3;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.user-info p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.stats-box {
+  background-color: #f3e8ff;
+  border: 1px solid #e9d5ff;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  font-weight: bold;
+  color: #6b21a8;
+}
+
+.submission-section {
+  margin-top: 2rem;
+}
+
+.submission-title {
+  color: #7e22ce;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.submission-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #faf5ff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.submission-table th,
+.submission-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #e9d5ff;
+}
+
+.submission-table th {
+  background-color: #ede9fe;
+  color: #6b21a8;
+}
+
+.submission-table td {
+  font-size: 0.95rem;
+}
+
+.accepted {
+  color: green;
+  font-weight: bold;
+}
+
+.failed {
+  color: red;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 1rem;
+  }
+
+  .submission-table th,
+  .submission-table td {
+    padding: 0.5rem;
+  }
+}

@@ -10,8 +10,8 @@ app.use(cookieParser());
 const cors = require('cors');
 
 app.use(cors({
-  origin: 'http://localhost:5173', 
-  credentials: true         
+  origin: 'http://localhost:5173',
+  credentials: true
 }));
 
 const PORT = process.env.PORT;
@@ -31,15 +31,17 @@ const signupRoute = require('./routes/signup.js');
 app.use('/signup', signupRoute);
 
 const practiceRoute = require('./routes/practice.js');
-app.use('/practice', practiceRoute); 
+app.use('/practice', practiceRoute);
 
 const problemRoute = require('./routes/problem.js');
-app.use('/problems', problemRoute); 
+app.use('/problems', problemRoute);
 
 const submitRoute = require('./routes/submit.js');
 app.use('/submit', submitRoute);
 
+const profileRoute = require('./routes/profile.js');
+app.use('/profile', profileRoute);
 
 app.listen(PORT, () => {
-    console.log('Listening on port ' + PORT);
+  console.log('Listening on port ' + PORT);
 });
