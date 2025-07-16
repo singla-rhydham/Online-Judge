@@ -1,13 +1,14 @@
 const express = require('express');
 const generateFile = require('./generatefile.js');
 const generateInputFile = require('./generateInputFile.js');
+const cors  = require('cors');
 
 const executeCpp = require('./executeCpp.js');
 const executeJava = require('./executeJava.js');
 const executePython = require('./executePython.js');
 
 const app = express();
-
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

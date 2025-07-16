@@ -1,0 +1,28 @@
+# Ignore node_modules (always rebuild inside container)
+node_modules
+codes
+inputs
+outputs
+
+# Ignore logs and temp files
+*.log
+*.tmp
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore your IDE/editor configs
+.vscode
+.idea
+
+# Ignore OS metadata
+*.swp
+
+# Ignore git folder and dockerfile cache
+.git
+.gitignore
+.dockerignore
+
+# Optional: Ignore environment files (if you load them differently)
+.env

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './problemPage.css';
+import { jwtDecode } from 'jwt-decode'; 
 
 const ProblemPage = () => {
   const { id } = useParams();
@@ -9,6 +10,8 @@ const ProblemPage = () => {
   const [code, setCode] = useState('');
   const [language, setLanguage] = useState('cpp');
   const [output, setOutput] = useState('');
+  const [isRunning, setIsRunning] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const fetchProblem = async () => {
@@ -22,18 +25,59 @@ const ProblemPage = () => {
     fetchProblem();
   }, [id]);
 
-  const handleSubmit = async () => {
+  const handleRun = async () => {
+    setIsRunning(true);
+    setOutput('');
+    try {
+      const res = await axios.post('http://localhost:8000/run', {
+        code,
+        language,
+        input: problem.sampleInput || ''
+      });
+      setOutput(res.data.output || res.data.error || 'No output');
+    } catch (err) {
+      setOutput('Error occurred while running your code.');
+    }
+    setIsRunning(false);
+  };
+
+  const handleSubmitCode = async () => {
+    const token = localStorage.getItem('token');
+    let user = null;
+
+    if (token) {
+      user = jwtDecode(token);
+    }
+
+    console.log("User:", user.id);
+
+    if (!user) {
+      alert("Please log in to submit your code.");
+      return;
+    }
+
+    setIsSubmitting(true);
     try {
       const res = await axios.post('http://localhost:5000/submit', {
         code,
         language,
-        input: problem.sampleInput
+        problemId: id,
+        userId: user.id
       });
-      setOutput(res.data.output);
+      console.log(id);
+      console.log("Submitting payload:", {
+        code,
+        language,
+        problemId: id,
+        userId: user.id
+      });
+
+      alert(res.data.message);
     } catch (err) {
-      console.error('Submission failed', err);
-      setOutput('Error occurred while running your code.');
+      console.error('Submit error', err.message);
+      alert('Failed to submit your code.');
     }
+    setIsSubmitting(false);
   };
 
   if (!problem) return <div>Loading...</div>;
@@ -44,6 +88,18 @@ const ProblemPage = () => {
         <h2 style={{ marginTop: '3rem' }}>{problem.problemName}</h2>
         <p className="description">{problem.description}</p>
         <p><strong>Difficulty:</strong> {problem.difficulty}</p>
+        {problem.sampleInput && (
+          <div className="sample-section">
+            <p><strong>Sample Input:</strong></p>
+            <pre>{problem.sampleInput}</pre>
+          </div>
+        )}
+        {problem.sampleOutput && (
+          <div className="sample-section">
+            <p><strong>Sample Output:</strong></p>
+            <pre>{problem.sampleOutput}</pre>
+          </div>
+        )}
       </div>
 
       <div className="editor-section">
@@ -60,7 +116,26 @@ const ProblemPage = () => {
           placeholder="Write your code here..."
         />
 
-        <button onClick={handleSubmit} className="submit-code-btn">Run Code</button>
+        <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+          <button
+            onClick={handleRun}
+            className="submit-code-btn"
+            disabled={isRunning || isSubmitting}
+            style={{ opacity: isSubmitting ? 0.5 : 1 }}
+          >
+            {isRunning ? "Running..." : "Run Code"}
+          </button>
+
+          <button
+            onClick={handleSubmitCode}
+            className="submit-code-btn"
+            disabled={isRunning || isSubmitting}
+            style={{ opacity: isRunning ? 0.5 : 1 }}
+          >
+            {isSubmitting ? "Submitting..." : "Submit Code"}
+          </button>
+        </div>
+
 
         <div className="output-section">
           <h4>Output:</h4>

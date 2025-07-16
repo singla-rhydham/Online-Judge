@@ -36,6 +36,10 @@ app.use('/practice', practiceRoute);
 const problemRoute = require('./routes/problem.js');
 app.use('/problems', problemRoute); 
 
+const submitRoute = require('./routes/submit.js');
+app.use('/submit', submitRoute);
+
+
 app.listen(PORT, () => {
     console.log('Listening on port ' + PORT);
 });
