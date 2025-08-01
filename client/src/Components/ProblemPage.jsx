@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import ReactMarkdown from 'react-markdown';
+import { jwtDecode } from 'jwt-decode';
 import './problemPage.css';
-import { jwtDecode } from 'jwt-decode'; 
 
 const ProblemPage = () => {
   const { id } = useParams();
+
+  // All hooks must be inside the component
   const [problem, setProblem] = useState(null);
   const [code, setCode] = useState('');
   const [language, setLanguage] = useState('cpp');
   const [output, setOutput] = useState('');
   const [isRunning, setIsRunning] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [aiReview, setAIReview] = useState('');
+  const [isReviewing, setIsReviewing] = useState(false);
 
   useEffect(() => {
     const fetchProblem = async () => {
@@ -32,7 +37,7 @@ const ProblemPage = () => {
       const res = await axios.post('http://localhost:8000/run', {
         code,
         language,
-        input: problem.sampleInput || ''
+        input: problem?.sampleInput || ''
       });
       setOutput(res.data.output || res.data.error || 'No output');
     } catch (err) {
@@ -49,8 +54,6 @@ const ProblemPage = () => {
       user = jwtDecode(token);
     }
 
-    console.log("User:", user.id);
-
     if (!user) {
       alert("Please log in to submit your code.");
       return;
@@ -64,13 +67,6 @@ const ProblemPage = () => {
         problemId: id,
         userId: user.id
       });
-      console.log(id);
-      console.log("Submitting payload:", {
-        code,
-        language,
-        problemId: id,
-        userId: user.id
-      });
 
       alert(res.data.message);
     } catch (err) {
@@ -79,6 +75,52 @@ const ProblemPage = () => {
     }
     setIsSubmitting(false);
   };
+
+  const handleAI_Review = async () => {
+    if (!code.trim()) {
+      alert("Please write some code before requesting an AI review.");
+      return;
+    }
+
+    setIsReviewing(true);
+    setAIReview('');
+
+    try {
+      const response = await fetch('http://localhost:5000/ai-review', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code })
+      });
+
+      if (!response.ok) {
+        setAIReview(`❌ Server error: ${response.status}`);
+        setIsReviewing(false);
+        return;
+      }
+
+      // Defensive JSON parsing
+      let data = null;
+      try {
+        data = await response.json();
+      } catch (jsonError) {
+        setAIReview("⚠️ Error: Server returned invalid response. Please try again.");
+        setIsReviewing(false);
+        return;
+      }
+
+      if (data && data.success) {
+        setAIReview(data.ai_response);
+      } else {
+        setAIReview("❌ AI failed to review your code.");
+      }
+    } catch (error) {
+      console.error("AI Review error:", error);
+      setAIReview("⚠️ Error while fetching AI review.");
+    } finally {
+      setIsReviewing(false);
+    }
+  };
+
 
   if (!problem) return <div>Loading...</div>;
 
@@ -103,7 +145,11 @@ const ProblemPage = () => {
       </div>
 
       <div className="editor-section">
-        <select value={language} onChange={(e) => setLanguage(e.target.value)} className="language-select">
+        <select
+          value={language}
+          onChange={e => setLanguage(e.target.value)}
+          className="language-select"
+        >
           <option value="cpp">C++</option>
           <option value="java">Java</option>
           <option value="python">Python</option>
@@ -112,7 +158,7 @@ const ProblemPage = () => {
         <textarea
           className="code-editor"
           value={code}
-          onChange={(e) => setCode(e.target.value)}
+          onChange={e => setCode(e.target.value)}
           placeholder="Write your code here..."
         />
 
@@ -134,12 +180,26 @@ const ProblemPage = () => {
           >
             {isSubmitting ? "Submitting..." : "Submit Code"}
           </button>
-        </div>
 
+          <button
+            onClick={handleAI_Review}
+            className="submit-code-btn"
+            disabled={isReviewing}
+            style={{ opacity: isReviewing ? 0.5 : 1 }}
+          >
+            {isReviewing ? "Reviewing..." : "AI Review"}
+          </button>
+        </div>
 
         <div className="output-section">
           <h4>Output:</h4>
           <pre>{output}</pre>
+        </div>
+        <div className="ai-review-section">
+          <h4>AI Review:</h4>
+          <div className="markdown-output">
+            <ReactMarkdown>{aiReview}</ReactMarkdown>
+          </div>
         </div>
       </div>
     </div>

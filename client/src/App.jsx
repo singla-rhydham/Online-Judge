@@ -8,6 +8,7 @@ import Contribute from './Components/Contribute.jsx';
 import Practice from './Components/Practice.jsx';
 import ProblemPage from './Components/ProblemPage.jsx';
 import ProfilePage from './Components/ProfilePage.jsx';
+import HomePage from './Components/HomePage.jsx';
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
         <Route path="/practice" element={<Practice />} />
         <Route path="/problems/:id" element={<ProblemPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/home" element={<HomePage />} />
       </Routes>
     </Router>
   );

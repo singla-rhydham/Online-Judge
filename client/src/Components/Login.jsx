@@ -1,14 +1,14 @@
 import React from 'react';
 import axios from 'axios';
 import './login.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Login = () => {
   const navigate = useNavigate();
 
   const handleBackgroundClick = (e) => {
     if (e.target.classList.contains('login-container')) {
-      navigate(-1); // Go back to previous page
+      navigate(-1); 
     }
   };
 
@@ -27,13 +27,15 @@ const Login = () => {
         { withCredentials: true }
       );
       localStorage.setItem('token', response.data.token);
-
       alert('Login successful!');
+      
+      localStorage.setItem("redirectAfterLogin", redirectPath);
+      window.location.reload();
       loadUser();
-      navigate('/'); 
 
     } catch (error) {
       alert('Login failed: ' + error.response.data.message);
+      navigate(-1);
     }
   };
 

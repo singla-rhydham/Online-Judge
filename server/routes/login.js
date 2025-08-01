@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
         const token = jwt.sign(
             { id: user._id, isAdmin: user.isAdmin }, 
             process.env.JWT_SECRET,                  
-            { expiresIn: '2h' }                     
+            { expiresIn: '2d' }                     
         );
 
         const cookieOptions = {

@@ -42,6 +42,9 @@ app.use('/submit', submitRoute);
 const profileRoute = require('./routes/profile.js');
 app.use('/profile', profileRoute);
 
+const AI_Review_Route = require('./routes/AI_Review.js');
+app.use('/ai-review', AI_Review_Route);
+
 app.listen(PORT, () => {
   console.log('Listening on port ' + PORT);
 });

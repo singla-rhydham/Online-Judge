@@ -67,3 +67,14 @@
   border-radius: 8px;
   white-space: pre-wrap;
 }
+
+.markdown-output pre,
+.markdown-output code {
+    background: #fae8ff;
+    border-radius: 6px;
+    padding: 0.15em 0.7em;
+    color: #701a75;
+    font-family: 'Fira Mono', 'Menlo', 'Consolas', monospace;
+    font-size: 0.98em;
+    margin: 0.3em 0;
+}

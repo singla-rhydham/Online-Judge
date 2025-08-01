@@ -1,6 +1,5 @@
 FROM node:20
 
-# Install compilers/interpreters
 RUN apt-get update && apt-get install -y \
     g++ \
     openjdk-17-jdk \

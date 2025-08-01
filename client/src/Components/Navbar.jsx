@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import './Navbar.css';
 
@@ -40,10 +40,10 @@ export const Navbar = () => {
         <div className="navbar-buttons">
           {!user ? (
             <>
-              <button type="button" className="login-btn" onClick={() => navigate('/login')}>
+              <button type="button" className="login-btn" onClick={() => navigate('/login', { state: { from: location.pathname + location.search } })}>
                 Login
               </button>
-              <button type="button" className="signup-btn" onClick={() => navigate('/signup')}>
+              <button type="button" className="signup-btn" onClick={() => navigate('/signup', { state: { from: location.pathname } })}>
                 Sign Up
               </button>
             </>
@@ -82,10 +82,20 @@ export const Navbar = () => {
         <div className={`menu-items ${isOpen ? 'show' : ''}`} id="mobile-menu">
           <ul className="menu-list">
             <li><Link to="/" className="menu-link" onClick={() => setIsOpen(false)}>Home</Link></li>
-            <li><Link to="/about" className="menu-link" onClick={() => setIsOpen(false)}>About</Link></li>
+            <li>
+              <a
+                href="https://github.com/rhydham-nith"
+                className="menu-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsOpen(false)}
+              >
+                About
+              </a>
+            </li>
             <li><Link to="/practice" className="menu-link" onClick={() => setIsOpen(false)}>Practice</Link></li>
-            <li><Link to="/contest" className="menu-link" onClick={() => setIsOpen(false)}>Contest</Link></li>
-            <li><Link to="/discussions" className="menu-link" onClick={() => setIsOpen(false)}>Discussions</Link></li>
+            {/* <li><Link to="/contest" className="menu-link" onClick={() => setIsOpen(false)}>Contest</Link></li> */}
+            {/* <li><Link to="/discussions" className="menu-link" onClick={() => setIsOpen(false)}>Discussions</Link></li> */}
           </ul>
         </div>
       </div>
