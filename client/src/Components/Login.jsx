@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import './login.css';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ const Login = () => {
     const formData = new FormData(e.target);
     const userName = formData.get('userName');
     const password = formData.get('password');
-    console.log(userName, "hello");
+    //console.log(userName, "hello");
 
     try {
       const response = await axios.post(
@@ -29,7 +29,6 @@ const Login = () => {
       localStorage.setItem('token', response.data.token);
       alert('Login successful!');
       
-      localStorage.setItem("redirectAfterLogin", redirectPath);
       window.location.reload();
       loadUser();
 

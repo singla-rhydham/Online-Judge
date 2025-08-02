@@ -12,13 +12,10 @@ const generateAIResponse = async (code) => {
         model: "gemini-2.0-flash",
         contents: `Go through the following code and provide details about potential issues. 
 If there are no issues, give suggestions on how to improve code quality.
-**Respond using valid Markdown syntax so the output is ready to render with React Markdown.**
-For example, use \`\`\` for code blocks, lists for bullet points, and bold or italics for emphasis.
+Respond using valid Markdown syntax so the output is ready to render with React Markdown.
 
 Here is the code to review:
-\`\`\`
 ${code}
-\`\`\`
 `,
     });
 
