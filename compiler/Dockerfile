@@ -1,18 +1,11 @@
-FROM node:20
-
-RUN apt-get update && apt-get install -y \
+FROM node:22-alpine
+WORKDIR /app
+RUN apk update && apk add --no-cache \
     g++ \
-    openjdk-17-jdk \
+    openjdk17 \
     python3 \
-    python3-pip
-
-WORKDIR /usr/src/app
-
-COPY package*.json ./
-RUN npm install
-
+    py3-pip
 COPY . .
-
+RUN npm install
 EXPOSE 8000
-
 CMD ["node", "index.js"]
