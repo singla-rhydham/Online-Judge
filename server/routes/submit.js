@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
                 input
             };
 
-            const response = await axios.post('http://localhost:8000/run', payload);
+            const response = await axios.post('http://54.80.126.183:8000/run', payload);
             const output = (response.data.output || '').trim();
 
             if (output !== expected.trim()) {

@@ -54,7 +54,7 @@ const Contribute = () => {
         };
 
         try {
-            const response = await axios.post('http://localhost:5000/contribute', payload);
+            const response = await axios.post('http://54.80.126.183/contribute', payload);
             alert(response.data);
             // Optionally reset the form:
             setFormData({

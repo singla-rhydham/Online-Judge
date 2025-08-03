@@ -9,7 +9,7 @@ const Practice = () => {
   useEffect(() => {
     const fetchProblems = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/practice');
+        const res = await axios.get('http://54.80.126.183/practice');
         setProblems(res.data);
       } catch (err) {
         console.error('Fetch error:', err);

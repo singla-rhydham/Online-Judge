@@ -14,7 +14,7 @@ const Signup = () => {
 
     return (
         <div className="signup-container" onClick={handleBackgroundClick}>
-        <form action="http://localhost:5000/signup/register" method="POST" className="signup-form" onClick={(e) => e.stopPropagation()}>
+        <form action="http://54.80.126.183/signup/register" method="POST" className="signup-form" onClick={(e) => e.stopPropagation()}>
             <h2 className="signup-title">Sign Up</h2>
             <input type="text" name="userName" placeholder="Username" required className="input-field" />
             <input type="text" name="firstName" placeholder="First Name" required className="input-field" />

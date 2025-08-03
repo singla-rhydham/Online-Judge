@@ -22,7 +22,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:5000/login',
+        'http://54.80.126.183/login',
         { userName, password },
         { withCredentials: true }
       );

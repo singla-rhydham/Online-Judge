@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
 import { jwtDecode } from 'jwt-decode';
-import './problemPage.css';
+import './ProblemPage.css';
 
 const ProblemPage = () => {
   const { id } = useParams();
@@ -21,7 +21,7 @@ const ProblemPage = () => {
   useEffect(() => {
     const fetchProblem = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/problems/${id}`);
+        const res = await axios.get(`http://54.80.126.183/problems/${id}`);
         setProblem(res.data);
       } catch (err) {
         console.error('Failed to load problem', err);
@@ -34,7 +34,7 @@ const ProblemPage = () => {
     setIsRunning(true);
     setOutput('');
     try {
-      const res = await axios.post('http://localhost:8000/run', {
+      const res = await axios.post('http://54.80.126.183:8000/run', {
         code,
         language,
         input: problem?.sampleInput || ''
@@ -61,7 +61,7 @@ const ProblemPage = () => {
 
     setIsSubmitting(true);
     try {
-      const res = await axios.post('http://localhost:5000/submit', {
+      const res = await axios.post('http://54.80.126.183/submit', {
         code,
         language,
         problemId: id,
@@ -86,7 +86,7 @@ const ProblemPage = () => {
     setAIReview('');
 
     try {
-      const response = await fetch('http://localhost:5000/ai-review', {
+      const response = await fetch('http://54.80.126.183/ai-review', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ code })
