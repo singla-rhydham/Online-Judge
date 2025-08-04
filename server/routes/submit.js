@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
                 input
             };
 
-            const response = await axios.post(import.meta.env.VITE_COMPILER_URL +'/run', payload);
+            const response = await axios.post(process.env.COMPILER_URL +'/run', payload);
             const output = (response.data.output || '').trim();
 
             if (output !== expected.trim()) {
