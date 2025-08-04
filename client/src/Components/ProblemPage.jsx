@@ -21,7 +21,7 @@ const ProblemPage = () => {
   useEffect(() => {
     const fetchProblem = async () => {
       try {
-        const res = await axios.get(`http://54.80.126.183/problems/${id}`);
+        const res = await axios.get(import.meta.env.VITE_BACKEND_URL + `/problems/${id}`);
         setProblem(res.data);
       } catch (err) {
         console.error('Failed to load problem', err);
@@ -34,7 +34,7 @@ const ProblemPage = () => {
     setIsRunning(true);
     setOutput('');
     try {
-      const res = await axios.post('http://54.80.126.183:8000/run', {
+      const res = await axios.post(import.meta.env.VITE_COMPILER_URL +'/run', {
         code,
         language,
         input: problem?.sampleInput || ''
@@ -61,7 +61,7 @@ const ProblemPage = () => {
 
     setIsSubmitting(true);
     try {
-      const res = await axios.post('http://54.80.126.183/submit', {
+      const res = await axios.post(import.meta.env.VITE_BACKEND_URL +'/submit', {
         code,
         language,
         problemId: id,
@@ -86,7 +86,7 @@ const ProblemPage = () => {
     setAIReview('');
 
     try {
-      const response = await fetch('http://54.80.126.183/ai-review', {
+      const response = await fetch(import.meta.env.VITE_BACKEND_URL +'/ai-review', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ code })

@@ -9,7 +9,7 @@ const ProfilePage = () => {
     const token = localStorage.getItem('token');
     if (!token) return;
 
-    axios.get('http://54.80.126.183/profile', {
+    axios.get(import.meta.env.VITE_BACKEND_URL +'/profile', {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then(res => setProfile(res.data))

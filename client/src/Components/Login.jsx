@@ -22,7 +22,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        'http://54.80.126.183/login',
+        import.meta.env.VITE_BACKEND_URL + '/login',
         { userName, password },
         { withCredentials: true }
       );
