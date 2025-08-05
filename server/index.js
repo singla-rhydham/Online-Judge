@@ -45,6 +45,9 @@ app.use('/profile', profileRoute);
 const AI_Review_Route = require('./routes/AI_Review.js');
 app.use('/ai-review', AI_Review_Route);
 
+const compiler_api_route = require('./routes/compiler-api.js');
+app.use('/api', compiler_api_route);
+
 app.listen(PORT, () => {
   console.log('Listening on port ' + PORT);
 });

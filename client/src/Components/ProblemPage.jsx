@@ -34,7 +34,7 @@ const ProblemPage = () => {
     setIsRunning(true);
     setOutput('');
     try {
-      const res = await axios.post(import.meta.env.VITE_COMPILER_URL +'/run', {
+      const res = await axios.post(import.meta.env.VITE_BACKEND_URL +'/api/run', {
         code,
         language,
         input: problem?.sampleInput || ''
